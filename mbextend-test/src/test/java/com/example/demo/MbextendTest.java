@@ -12,10 +12,12 @@ import com.example.demo.mapper.OrderMapper;
 import com.example.demo.mapper.ProductCategoryMapper;
 import com.example.demo.tablemap.QMember;
 import com.example.demo.tablemap.QOrder;
+import com.example.demo.tablemap.QOrderItem;
 import com.example.demo.tablemap.QProductCategory;
 import com.mbextend.ExprUtil;
 import com.mbextend.SqlBuilder;
 import com.mbextend.SqlQuery;
+import com.mbextend.SqlUpdate;
 import com.mbextend.enums.TimeField;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -156,7 +158,6 @@ public class MbextendTest {
                 .innerJoin(qOrder,qMember.id.eq(qOrder.memberId))
                 .select(qMember.id,qMember.username,qOrder.id,qOrder.createTime,qOrder.status)
                 .where(qMember.username.eq("user-0"))
-                .where(ExprUtil.year(qOrder.createTime).lt(new Date()))
                 .build();
         Member member = memberMapper.selectOne(sqlQuery);
         if(member!=null && member.getOrders()!=null) {
@@ -394,5 +395,31 @@ public class MbextendTest {
         IPage<Member> page = new Page<>(1,5);
         IPage<Member> members = memberMapper.selectPage(page,query);
         members.getRecords().forEach(m -> System.out.println(JSON.toJSONString(m)));
+    }
+
+    @Test
+    void testUpdate(){
+        QOrder qOrder = new QOrder();
+        QOrderItem qItem = new QOrderItem();
+        SqlUpdate sqlUpdate = SqlBuilder.update(qOrder)
+                .innerJoin(qItem, qItem.orderId.eq(qOrder.id))
+                .where(qOrder.id.eq("1525754268026703886"))
+                .set(qItem.price, ExprUtil.mul(qItem.price, 0.8))
+                .set(qOrder.totalPrice, ExprUtil.mul(qOrder.totalPrice, 0.8))
+                .build();
+        Integer count = orderMapper.update(sqlUpdate);
+        System.out.println(count);
+    }
+
+    @Test
+    void getOrderInfo(){
+        QOrder qOrder = new QOrder();
+        QOrderItem qItem = new QOrderItem("item_");
+        SqlQuery sqlQuery = SqlBuilder.query(qOrder)
+                .innerJoin(qItem, qItem.orderId.eq(qOrder.id))
+                .where(qOrder.id.eq("1525754268026703886"))
+                .build();
+        Order order = orderMapper.selectOne(sqlQuery);
+        System.out.println(JSON.toJSONString(order));
     }
 }

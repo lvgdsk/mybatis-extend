@@ -207,7 +207,7 @@ Boolean exists(@Param("sqlQuery") SqlQuery sqlQuery);
 Integer update(@Param("sqlUpdate") SqlUpdate sqlUpdate);
 ```
 
-`@ResultMap`内结果映射名需与`XxxMapper.xml`文件内的一至。注意，结果映射内的关联对象需设置别名前缀，避免列名冲突。
+`@ResultMap`指定的结果映射名需与`XxxMapper.xml`文件内的一至。注意，结果映射内的关联对象需设置别名前缀，避免列名冲突。
 
 ```xml
 <mapper namespace="com.example.demo.mapper.MemberMapper">
@@ -395,8 +395,6 @@ SqlQuery sqlQuery = SqlBuilder.query(qMember)
     // 查询指定列
     .select(qMember.id,qMember.username,qOrder.id,qOrder.createTime,qOrder.status)
     .where(qMember.username.eq("user-0"))
-    // 构建 year(qOrder.createTime) < new Date() 的表达式
-    .where(ExprUtil.year(qOrder.createTime).lt(new Date()))
     .build();
 Member member = memberMapper.selectOne(sqlQuery);
 if(member!=null && member.getOrders()!=null) {
@@ -404,9 +402,25 @@ if(member!=null && member.getOrders()!=null) {
 }
 ```
 
+生成的sql语句：
+
+```sql
+select 
+t1.`id`, 
+t1.`username`, 
+t2.`id` as ord_id, 
+t2.`create_time` as ord_create_time, 
+t2.`status` as ord_status 
+from `member` as t1 
+inner join `order` as t2 on t1.`id` =t2.`member_id` 
+where t1.`username` ='user-0';
+```
+
+
+
 ## 子查询
 
-示例1：
+**示例1：**
 
 ```java
 QMember qMember = new QMember();
@@ -424,28 +438,49 @@ List<Order> orders = orderMapper.select(sqlQuery2);
 orders.forEach(o -> System.out.println(JSON.toJSONString(o)));
 ```
 
-示例2：
+生成的sql语句：
 
-```java
-    @Test
-    void testSubQuery1(){
-        QMember qMember = new QMember();
-        SqlQuery sqlQuery1 = SqlBuilder.query(qMember)
-                .select(qMember.id)
-                .where(qMember.username.in(Arrays.asList("user-3","user-4")))
-                .build();
-
-        QOrder qOrder = new QOrder();
-        SqlQuery sqlQuery2 = SqlBuilder.query(qOrder)
-                .select(qOrder.id, qOrder.createTime)
-                .where(qOrder.memberId.in(sqlQuery1))
-                .build();
-        List<Order> orders = orderMapper.select(sqlQuery2);
-        orders.forEach(o -> System.out.println(JSON.toJSONString(o)));
-    }
+```sql
+select t1.`id`, t1.`create_time`, t1.`status` 
+from `order` as t1 
+where t1.`member_id` =(
+    select t1.`id` 
+    from `member` as t1 
+    where t1.`username` ='user-1'
+);
 ```
 
-示例3：
+**示例2：**
+
+```java
+QMember qMember = new QMember();
+SqlQuery sqlQuery1 = SqlBuilder.query(qMember)
+    .select(qMember.id)
+    .where(qMember.username.in(Arrays.asList("user-3","user-4")))
+    .build();
+
+QOrder qOrder = new QOrder();
+SqlQuery sqlQuery2 = SqlBuilder.query(qOrder)
+    .select(qOrder.id, qOrder.createTime)
+    .where(qOrder.memberId.in(sqlQuery1))
+    .build();
+List<Order> orders = orderMapper.select(sqlQuery2);
+orders.forEach(o -> System.out.println(JSON.toJSONString(o)));
+```
+
+生成的sql语句：
+
+```sql
+select t1.`id`, t1.`create_time` 
+from `order` as t1 
+where t1.`member_id` in (
+    select t1.`id` 
+    from `member` as t1 
+    where t1.`username` in ('user-3','user-4')
+);
+```
+
+**示例3：**
 
 ```java
 QMember qMember = new QMember();
@@ -792,5 +827,30 @@ select t1.`username`, t1.`birthday`
 from `member` as t1 
 where t1.`birthday` between '2008-08-01 00:00:00.0' and '2009-08-01 00:00:00.0' 
 limit 5;
+```
+
+## update
+
+```java
+QOrder qOrder = new QOrder();
+QOrderItem qItem = new QOrderItem();
+SqlUpdate sqlUpdate = SqlBuilder.update(qOrder)
+    .innerJoin(qItem, qItem.orderId.eq(qOrder.id))
+    .where(qOrder.id.eq("1525754268026703886"))
+    .set(qItem.price, ExprUtil.mul(qItem.price, 0.8))
+    .set(qOrder.totalPrice, ExprUtil.mul(qOrder.totalPrice, 0.8))
+    .build();
+Integer count = orderMapper.update(sqlUpdate);
+System.out.println(count);
+```
+
+生成的sql语句
+
+```sql
+update `order` as t1 
+inner join `order_item` as t2 on t2.`order_id` =t1.`id` 
+set t1.`total_price`=(t1.`total_price` * 0.8),
+t2.`price`=(t2.`price` * 0.8)
+where t1.`id` ='1525754268026703886';
 ```
 

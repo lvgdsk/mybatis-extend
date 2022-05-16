@@ -10,17 +10,17 @@ import java.util.List;
  */
 public class SqlUpdate{
     private final String sqlStatement;
-    private final List<Object> params;
+    private final List<Object> sqlParams;
 
-    public SqlUpdate(String sqlStatement, List<Object> params) {
+    public SqlUpdate(String sqlStatement, List<Object> sqlParams) {
         this.sqlStatement = sqlStatement;
-        this.params = params;
+        this.sqlParams = sqlParams;
     }
     public String getSqlStatement() {
         return sqlStatement;
     }
 
-    public List<Object> getParams() {
-        return params;
+    public List<Object> getSqlParams() {
+        return sqlParams;
     }
 }

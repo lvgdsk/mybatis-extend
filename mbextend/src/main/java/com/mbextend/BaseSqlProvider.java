@@ -18,7 +18,7 @@ public class BaseSqlProvider {
 
     /** 构建update sql语句 */
     public static String update(@Param("sqlUpdate")SqlUpdate sqlUpdate){
-        return fillParams(sqlUpdate.getSqlStatement(),sqlUpdate.getParams(),"sqlUpdate");
+        return fillParams(sqlUpdate.getSqlStatement(),sqlUpdate.getSqlParams(),"sqlUpdate");
     }
 
     private static String fillParams(String sqlStatement,List<Object> params,String paramName){
