@@ -4,9 +4,9 @@
 
 # 二、安装
 
-1、`install mbetend` 项目
+1、`install mbextend` 项目
 
-2、引入 `mbetend` 项目依赖
+2、引入 `mbextend` 项目依赖
 
 # 三、生成表映射类
 
