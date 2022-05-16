@@ -183,7 +183,7 @@ public class TableMapGenerator {
 
 # 四、复制粘贴mapper方法
 
-将下列方法复制到各`Mapper`类内：
+将下列方法复制到各`Mapper`接口内：
 
 ```java
 @SelectProvider(type = BaseSqlProvider.class, method = "select")
