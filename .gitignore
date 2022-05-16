@@ -1,0 +1,12 @@
+**/.vscode/*
+
+**/.settings/*
+**/.settings
+**/.project
+**/.factorypath
+**/.classpath
+
+**/.iml
+**/.idea/*
+**/target/*
+*.iml

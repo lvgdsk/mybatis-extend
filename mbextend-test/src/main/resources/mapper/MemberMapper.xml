@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MemberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Member">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="phone" property="phone" />
+        <result column="birthday" property="birthday" />
+        <result column="gender" property="gender" />
+        <result property="money" column="money"/>
+        <result property="addressCode" column="address_code"/>
+        <result property="addressName" column="address_name"/>
+        <result property="year" column="year"/>
+        <result property="rankLevel" column="rankLevel"/>
+        <!-- 需设置别名前缀 -->
+        <collection property="orders" ofType="com.example.demo.entity.Order" columnPrefix="ord_">
+            <id column="id" property="id"/>
+            <result column="status" property="status"/>
+            <result column="create_time" property="createTime"/>
+            <result column="total_price" property="totalPrice"/>
+        </collection>
+    </resultMap>
+</mapper>

@@ -1,0 +1,15 @@
+@SelectProvider(type = BaseSqlProvider.class, method = "select")
+@ResultMap("BaseResultMap")
+List<T> select(@Param("sqlQuery") SqlQuery sqlQuery);
+
+@SelectProvider(type = BaseSqlProvider.class, method = "select")
+@ResultMap("BaseResultMap")
+T selectOne(@Param("sqlQuery") SqlQuery sqlQuery);
+
+@SelectProvider(type = BaseSqlProvider.class, method = "select")
+@ResultMap("BaseResultMap")
+IPage<T> selectPage(IPage<T> page, @Param("sqlQuery") SqlQuery sqlQuery);
+
+@UpdateProvider(type = BaseSqlProvider.class, method = "update")
+@ResultType(Integer.class)
+Integer update(@Param("sqlUpdate") SqlUpdate sqlUpdate);

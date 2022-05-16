@@ -1,0 +1,39 @@
+package $package$;
+
+import com.mbextend.SqlTaBle;
+import com.mbextend.QColumn;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class Q$entity$ extends SqlTaBle {
+	private static final String tableName = "$table$";
+	private String tableAlias = "t0";
+
+    $fieldsDeclare$
+
+    public Q$entity$() {
+        this(null);
+    }
+
+	public Q$entity$(String columnPrefix) {
+        $fieldInits$
+        $setTables$
+    }
+
+	protected String getTableName() {
+		return tableName;
+	}
+
+	protected String getTableAlias() {
+		return tableAlias;
+	}
+
+    protected List<QColumn> getQColumns() {
+        return Arrays.asList($sqlColumns$);
+    }
+
+    protected void setTableAlias(String tableAlias) {
+        this.tableAlias = tableAlias;
+    }
+}

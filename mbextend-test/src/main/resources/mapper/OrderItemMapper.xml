@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OrderItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.OrderItem">
+        <id column="id" property="id" />
+        <result column="product_id" property="productId" />
+        <result column="number" property="number" />
+        <result column="price" property="price" />
+        <result column="order_id" property="orderId" />
+        <association property="product" javaType="com.example.demo.entity.Product" columnPrefix="pro_">
+            <id property="id" column=""/>
+            <result column="name" property="name" />
+            <result column="price" property="price" />
+            <result column="stock" property="stock" />
+            <result column="category_id" property="categoryId" />
+        </association>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, product_id, number, price, order_id
+    </sql>
+
+</mapper>
