@@ -1,12 +1,16 @@
 # 一、简介
 
-基于mybatis写的扩展，通过链式接口来构建sql语句，免于手写sql语句。代码量不多，实现简单，会java就行，因此自个维护不难；
+背景：`mybatis`简单易用，但要手写sql语句；引入`mybatis plus`后，虽然简化了不少，但连表查询时，依然要手写`sql`语句，手写虽然灵活且直观，但容易疏忽大意。
+
+`mybatis`提供了`@SelectProvider`注解来设置`sql`语句源，项目是在这一基础上进行扩展的。通过简单易用的链式接口来构建`sql`语句，免于手写`sql`语句。项目代码量少，实现简单，自维护容易。
 
 # 二、安装
 
-1、`install mbextend` 项目
+1、拉取`mbextend` 项目
 
-2、引入 `mbextend` 项目依赖
+2、`install` `mbextend` 项目
+
+3、引入 `mbextend` 项目依赖
 
 # 三、生成表映射类
 
@@ -353,7 +357,7 @@ members.forEach(m-> System.out.println(JSON.toJSONString(m)));
 生成的sql语句：
 
 ```sql
-select t1.`birthday`, count(*) 
+select t1.`birthday`, count(*)
 from `member` as t1 
 where t1.`birthday` between '2008-07-31 00:00:00.0' and '2008-08-31 00:00:00.0' 
 group by t1.`birthday` 
