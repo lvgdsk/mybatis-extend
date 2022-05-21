@@ -237,7 +237,7 @@ public class MbextendTest {
     void testIfFunc(){
         QMember qMember = new QMember();
         SqlQuery sqlQuery = SqlBuilder.query(qMember)
-                .select(ExprUtil.ifExpr(qMember.gender.eq("F"),"女人","男人")
+                .select(ExprUtil.ifFunc(qMember.gender.eq("F"),"女人","男人")
                         .alias(qMember.gender),qMember.username)
                 .where(qMember.username.eq("user-7"))
                 .build();
@@ -255,7 +255,7 @@ public class MbextendTest {
                 .build();
 
         SqlQuery sqlQuery = SqlBuilder.query(null)
-                .select(ExprUtil.ifExpr(ExprUtil.exists(query),true,false))
+                .select(ExprUtil.ifFunc(ExprUtil.exists(query),true,false))
                 .build();
 
         Boolean exists = memberMapper.exists(sqlQuery);

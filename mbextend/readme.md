@@ -370,7 +370,7 @@ SqlQuery query = SqlBuilder.query(qMember)
     .build();
 
 SqlQuery sqlQuery = SqlBuilder.query(null)
-    .select(ExprUtil.ifExpr(ExprUtil.exists(query),true,false))
+    .select(ExprUtil.ifFunc(ExprUtil.exists(query),true,false))
     .build();
 
 Boolean exists = memberMapper.exists(sqlQuery);
@@ -538,7 +538,7 @@ QMember qMember = new QMember();
 SqlQuery sqlQuery = SqlBuilder.query(qMember)
     // 可使用ExprUtil构建各种算术或函数表达式，
     // if(qMember.gender="f","女人","男人")
-    .select(ExprUtil.ifExpr(qMember.gender.eq("F"),"女人","男人")
+    .select(ExprUtil.ifFunc(qMember.gender.eq("F"),"女人","男人")
             // 指定别名，可以是字符串别名，也可以是特定列（替代）
             .alias(qMember.gender),qMember.username)
     .where(qMember.username.eq("user-7"))

@@ -132,15 +132,15 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.MID,param1,param2,param3);
     }
     /** 与mid完全相同 */
-    public static ArithFuncExpr substr(Object param1,Object param2,Object param3){
+    public static ArithFuncExpr subStr(Object param1,Object param2,Object param3){
         return SqlExprBuilder.build(ExprEnum.SUBSTR,param1,param2,param3);
     }
     /** 与SUBSTR完全相同 */
-    public static ArithFuncExpr substring(Object param1,Object param2,Object param3){
+    public static ArithFuncExpr subString(Object param1,Object param2,Object param3){
         return SqlExprBuilder.build(ExprEnum.SUBSTRING,param1,param2,param3);
     }
     /** p1为“a,b,c”，p2为“,”，p3为2则返回“a,b”，p3为-2则返回“b,c” */
-    public static ArithFuncExpr substringIndex(Object param1,Object param2,Object param3){
+    public static ArithFuncExpr subStringIndex(Object param1,Object param2,Object param3){
         return SqlExprBuilder.build(ExprEnum.SUBSTRING_INDEX,param1,param2,param3);
     }
     /** 将p1字符串重复p2次 */
@@ -372,15 +372,15 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.DATE_ADD,param1,param2,param3);
     }
     /** 计算起始日期 p1 加上 p2 天的日期 */
-    public static ArithFuncExpr adddate(Object param1,Object param2){
+    public static ArithFuncExpr addDate(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.ADDDATE,param1,param2);
     }
     /** p1日期时间加上p2秒 */
-    public static ArithFuncExpr addtime(Object param1,Object param2){
+    public static ArithFuncExpr addTime(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.ADDTIME,param1,param2);
     }
     /** 返回当前日期 */
-    public static ArithFuncExpr curdate( QColumn alias){
+    public static ArithFuncExpr curDate( QColumn alias){
         return SqlExprBuilder.build(ExprEnum.CURDATE);
     }
     /** 返回当前日期 */
@@ -396,7 +396,7 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.CURRENT_TIMESTAMP);
     }
     /** 返回当前时间 */
-    public static ArithFuncExpr curtime( QColumn alias){
+    public static ArithFuncExpr curTime( QColumn alias){
         return SqlExprBuilder.build(ExprEnum.CURTIME);
     }
     /** 从日期或日期时间表达式中提取日期值 */
@@ -404,7 +404,7 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.DATE,param1);
     }
     /** 计算日期 d1->d2 之间相隔的天数	 */
-    public static ArithFuncExpr datediff(Object param1,Object param2){
+    public static ArithFuncExpr dateDiff(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.DATEDIFF,param1,param2);
     }
     /** 按表达式p2的要求显示日期p1 */
@@ -420,19 +420,19 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.DAY,param1);
     }
     /** 返回日期p1是星期几，如 Monday,Tuesday */
-    public static ArithFuncExpr dayname(Object param1){
+    public static ArithFuncExpr dayName(Object param1){
         return SqlExprBuilder.build(ExprEnum.DAYNAME,param1);
     }
     /** 计算日期p1是本月的第几天 */
-    public static ArithFuncExpr dayofmonth(Object param1){
+    public static ArithFuncExpr dayOfMonth(Object param1){
         return SqlExprBuilder.build(ExprEnum.DAYOFMONTH,param1);
     }
     /** 日期p1今天是星期几，1 星期日，2 星期一，以此类推 */
-    public static ArithFuncExpr dayofweek(Object param1){
+    public static ArithFuncExpr dayOfWeek(Object param1){
         return SqlExprBuilder.build(ExprEnum.DAYOFWEEK,param1);
     }
     /** 计算日期p1是本年的第几天 */
-    public static ArithFuncExpr dayofyear(Object param1){
+    public static ArithFuncExpr dayOfYear(Object param1){
         return SqlExprBuilder.build(ExprEnum.DAYOFYEAR,param1);
     }
     /** 从日期p1中获取指定的值，p2(TimeField)指定返回的值。 */
@@ -460,11 +460,11 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.LOCALTIMESTAMP);
     }
     /** 使用p1(year)和p2(day-of-year)组合一个日期 */
-    public static ArithFuncExpr MAKEDATE(Object param1,Object param2){
+    public static ArithFuncExpr makeDate(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.MAKEDATE,param1,param2);
     }
     /** 组合时间，参数分别为小时、分钟、秒 */
-    public static ArithFuncExpr maketime(Object param1,Object param2,Object param3){
+    public static ArithFuncExpr makeTime(Object param1,Object param2,Object param3){
         return SqlExprBuilder.build(ExprEnum.MAKETIME,param1,param2,param3);
     }
     /** 返回日期参数所对应的微秒数，MICROSECOND("2017-06-20 09:34:00.000023"); 返回 23 */
@@ -476,7 +476,7 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.MINUTE,param1);
     }
     /** 返回日期当中的月份名称，如 November */
-    public static ArithFuncExpr monthname(Object param1){
+    public static ArithFuncExpr monthName(Object param1){
         return SqlExprBuilder.build(ExprEnum.MONTHNAME,param1);
     }
     /** 计算日期p1是本月的第几天 */
@@ -512,11 +512,11 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.STR_TO_DATE,param1,param2);
     }
     /** 日期 p1 减去 p2 天后的日期 */
-    public static ArithFuncExpr subdate(Object param1,Object param2){
+    public static ArithFuncExpr subDate(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.SUBDATE,param1,param2);
     }
     /** 时间 p1 减去 p2 秒的时间 */
-    public static ArithFuncExpr subtime(Object param1,Object param2){
+    public static ArithFuncExpr subTime(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.SUBTIME,param1,param2);
     }
     /** 返回当前日期和时间 */
@@ -536,7 +536,7 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.TIME_TO_SEC,param1);
     }
     /** 计算p1时间与p2时间的时间差，p1要不小于p2，否则返回null；TIMEDIFF("13:10:11", "13:10:10") 返回 00:00:01 */
-    public static ArithFuncExpr timediff(Object param1,Object param2){
+    public static ArithFuncExpr timeDiff(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.TIMEDIFF,param1,param2);
     }
     /** 将p1日期时间加上p2时间，TIMESTAMP('2001-01-11','12:00:00')返回2001-01-11 12:12:12；TIMESTAMP('2001-01-11 12:00:00','2:00:00')返回2001-01-11 14:00:00 */
@@ -544,7 +544,7 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.TIMESTAMP,param1,param2);
     }
     /** 计算时间差，返回 p3 − p2 的时间差，p1指定时差单位 */
-    public static ArithFuncExpr timestampdiff(Object param1,Object param2,Object param3){
+    public static ArithFuncExpr timestampDiff(Object param1,Object param2,Object param3){
         return SqlExprBuilder.build(ExprEnum.TIMESTAMPDIFF,param1,param2,param3);
     }
     /** 计算p1日期距离 0000 年 1 月 1 日的天数 */
@@ -560,7 +560,7 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.WEEKDAY,param1);
     }
     /** 计算p1日期是本年的第几个星期（从1开始；不存在第0周，因为被认为是上一年的最后一周），以周1作为一周的第一天，计算方式：过了几次周1则为第几周 */
-    public static ArithFuncExpr weekofyear(Object param1){
+    public static ArithFuncExpr weekOfYear(Object param1){
         return SqlExprBuilder.build(ExprEnum.WEEKOFYEAR,param1);
     }
     /** 计算日期p1是本年的第几天 */
@@ -568,7 +568,7 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.YEAR,param1);
     }
     /** 返回年份和第几周（从1开始，计算方式：过了几次p2指定的星期则为第几周；不存在第0周，因为被认为是上一年的最后一周），如 YEARWEEK('2022-01-10',1) 返回 202202，p2用于指定以周几作为一周的开始，默认0,即以周日作为一周的第一天 */
-    public static ArithFuncExpr yearweek(Object param1){
+    public static ArithFuncExpr yearWeek(Object param1){
         return SqlExprBuilder.build(ExprEnum.YEARWEEK,param1);
     }
     /** 判断表达式是否为 NULL，是返回1，不是返回0 */
@@ -576,11 +576,11 @@ public class ExprUtil {
         return SqlExprBuilder.build(ExprEnum.ISNULL,param1);
     }
     /** 如果p1的值不为 NULL，则返回p1，否则返回p2。 */
-    public static ArithFuncExpr ifnull(Object param1,Object param2){
+    public static ArithFuncExpr ifNull(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.IFNULL,param1,param2);
     }
     /** 如果表达式p1成立，返回结果p2；否则，返回结果p3。 */
-    public static ArithFuncExpr ifExpr(Object param1,Object param2,Object param3){
+    public static ArithFuncExpr ifFunc(Object param1,Object param2,Object param3){
         return SqlExprBuilder.build(ExprEnum.IF,param1,param2,param3);
     }
     /** 返回参数中的第一个非空表达式（从左向右） */
@@ -613,7 +613,7 @@ public class ExprUtil {
         return SqlExprBuilder.buildWindowFunctionExpr(ExprEnum.PERCENT_RANK ,partitions,orders);
     }
     /** 平均分配桶号 */
-    public static ArithFuncExpr overNtile(List<GroupOrderExpr> partitions, List<GroupOrderExpr> orders, Object param){
+    public static ArithFuncExpr overNTile(List<GroupOrderExpr> partitions, List<GroupOrderExpr> orders, Object param){
         return SqlExprBuilder.buildWindowFunctionExpr(ExprEnum.NTILE ,partitions,orders,param);
     }
     /** 查询第n大的表达式 */
