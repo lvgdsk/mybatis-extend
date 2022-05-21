@@ -94,29 +94,38 @@ public class SqlExprBuilder {
                                                         List<GroupOrderExpr> partitions,
                                                         List<GroupOrderExpr> orders,
                                                         Object ... params){
-        List<Object> sqlParams = new ArrayList<>(10);
+        List<Object> sqlParams = new ArrayList<>(6);
         String expression = exprEnum.expr();
         if(exprEnum.count()>0 && params.length>0){
             String[] actParams = parseParam(sqlParams,params);
             expression = String.format(expression,(Object[])actParams);
         }
-        String groupby = "partition by ";
-        String orderby = "order by ";
+        String groupBy = "partition by ";
+        String orderBy = "order by ";
         if(partitions!=null && !partitions.isEmpty()){
-            groupby += partitions.stream().map(GroupOrderExpr::getExpression).collect(Collectors.joining(","));
+            groupBy += partitions.stream().map(expr->{
+                sqlParams.add(expr.getParams());
+                return expr.getExpression();
+            }).collect(Collectors.joining(","));
         }else{
-            groupby = "";
+            groupBy = "";
         }
-        orderby += orders.stream().map(GroupOrderExpr::getExpression).collect(Collectors.joining(","));
-        expression = expression.replace("${group}",groupby);
-        expression = expression.replace("${order}",orderby);
-
+        if(orders!=null && !orders.isEmpty()){
+            orderBy += orders.stream().map(expr->{
+                sqlParams.add(expr.getParams());
+                return expr.getExpression();
+            }).collect(Collectors.joining(","));
+        }else{
+            orderBy = "";
+        }
+        expression = expression.replace("${group}",groupBy);
+        expression = expression.replace("${order}",orderBy);
         return new ArithFuncExpr(expression, sqlParams);
     }
 
     /** 构建条表达式 */
     public static ConditionExpr buildConditionExpr(SqlExpr sqlExpr, SqlOperator sqlOperator, Object param){
-        List<Object> params = new ArrayList<>(10);
+        List<Object> params = new ArrayList<>(6);
 
         StringBuilder builder = new StringBuilder();
         if(sqlExpr!=null){
