@@ -337,7 +337,7 @@ members.forEach(m-> System.out.println(JSON.toJSONString(m)));
 ```java
 QMember qMember = new QMember();
 SqlQuery sqlQuery = SqlBuilder.query(qMember)
-    .select(qMember.username)
+    .select(qMember.birthday,ExprUtil.count("*"))
     .where(qMember.birthday.between(
         DateUtil.parse("2008-08-00"),
         DateUtil.parse("2008-09-00")))
