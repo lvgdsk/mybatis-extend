@@ -55,6 +55,7 @@ public enum ExprEnum {
     COS("cos(%s)",1),
     COT("cot(%s)",1),
     COUNT("count(%s)",1),
+    COUNT_ALL("count(*)",0),
     DEGREES("degrees(%s)",1),
     EXP("exp(%s)",1),
     FLOOR("floor(%s)",1),

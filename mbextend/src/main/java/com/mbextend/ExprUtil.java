@@ -219,11 +219,11 @@ public class ExprUtil {
     public static ArithFuncExpr acos(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.ACOS,param1,param2);
     }
-    /** 求反正弦值（单位为弧度），p1 为一个数值*/
+    /** 求反正弦值（单位为弧度）*/
     public static ArithFuncExpr asin(Object param1){
         return SqlExprBuilder.build(ExprEnum.ASIN,param1);
     }
-    /** 求反正切值（单位为弧度），p1 为一个数值*/
+    /** 求反正切值（单位为弧度）*/
     public static ArithFuncExpr atan(Object param1){
         return SqlExprBuilder.build(ExprEnum.ATAN,param1);
     }
@@ -231,7 +231,7 @@ public class ExprUtil {
     public static ArithFuncExpr atan2(Object param1,Object param2){
         return SqlExprBuilder.build(ExprEnum.ATAN2,param1,param2);
     }
-    /** 返回一个表达式的平均值，p1是一个字段*/
+    /** 平均值*/
     public static ArithFuncExpr avg(Object param1){
         return SqlExprBuilder.build(ExprEnum.AVG,param1);
     }
@@ -243,7 +243,7 @@ public class ExprUtil {
     public static ArithFuncExpr ceiling(Object param1){
         return SqlExprBuilder.build(ExprEnum.CEILING,param1);
     }
-    /** 求 p1 的反余弦值（单位为弧度），p1 为一个数值 */
+    /** 求 p1 的反余弦值（单位为弧度）*/
     public static ArithFuncExpr cos(Object param1){
         return SqlExprBuilder.build(ExprEnum.COS,param1);
     }
@@ -251,9 +251,13 @@ public class ExprUtil {
     public static ArithFuncExpr cot(Object param1){
         return SqlExprBuilder.build(ExprEnum.COT,param1);
     }
-    /** 返回查询的记录总数，p1 参数是一个字段或者 * 号 */
+    /** 计数：count(param1) */
     public static ArithFuncExpr count(Object param1){
         return SqlExprBuilder.build(ExprEnum.COUNT,param1);
+    }
+    /** 计数：count(*) */
+    public static ArithFuncExpr count(){
+        return SqlExprBuilder.build(ExprEnum.COUNT_ALL);
     }
     /** 将弧度转换为角度 */
     public static ArithFuncExpr degrees(Object param1){

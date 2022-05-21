@@ -337,7 +337,7 @@ members.forEach(m-> System.out.println(JSON.toJSONString(m)));
 ```java
 QMember qMember = new QMember();
 SqlQuery sqlQuery = SqlBuilder.query(qMember)
-    .select(qMember.birthday,ExprUtil.count("*"))
+    .select(qMember.birthday,ExprUtil.count())
     .where(qMember.birthday.between(
         DateUtil.parse("2008-08-00"),
         DateUtil.parse("2008-09-00")))
@@ -353,7 +353,7 @@ members.forEach(m-> System.out.println(JSON.toJSONString(m)));
 生成的sql语句：
 
 ```sql
-select t1.`birthday`, count(1) 
+select t1.`birthday`, count(*) 
 from `member` as t1 
 where t1.`birthday` between '2008-07-31 00:00:00.0' and '2008-08-31 00:00:00.0' 
 group by t1.`birthday` 

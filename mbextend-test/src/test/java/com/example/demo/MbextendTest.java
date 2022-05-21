@@ -137,7 +137,7 @@ public class MbextendTest {
     void testGroupQuery(){
         QMember qMember = new QMember();
         SqlQuery sqlQuery = SqlBuilder.query(qMember)
-                .select(qMember.birthday,ExprUtil.count("*"))
+                .select(qMember.birthday,ExprUtil.count())
                 .where(qMember.birthday.between(
                         DateUtil.parse("2008-08-00"),
                         DateUtil.parse("2008-09-00")))
